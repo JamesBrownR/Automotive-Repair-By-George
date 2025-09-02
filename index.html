@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Automotive Repair By George | OKC Auto Repair</title>
+  <meta name="description" content="Automotive Repair By George – trustworthy, veteran-owned auto repair in Oklahoma City. Honest diagnostics, fair pricing, and great communication." />
+  <meta name="theme-color" content="#111111" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;         /* primary background (white) */
+      --text:#111111;       /* primary text (near-black) */
+      --muted:#6b7280;      /* gray-500 */
+      --light:#f5f7fb;      /* very light gray */
+      --card:#ffffff;       /* card bg */
+      --border:#e5e7eb;     /* gray-200 */
+      --accent:#1f2937;     /* slate-800 for buttons/headers */
+      --blue:#2563eb;       /* blue accent */
+      --red:#ef4444;        /* red accent */
+      --green:#10b981;      /* success */
+      --star:#fbbf24;       /* amber-400 */
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+    a{color:var(--blue);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Top contact bar */
+    .topbar{position:sticky;top:0;z-index:50;background:#000;color:#fff}
+    .topbar .inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between}
+    .callnow{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;padding:.5rem .9rem;border-radius:999px;font-weight:700;border:2px solid transparent}
+    .callnow:hover{filter:brightness(1.05)}
+    .flag{display:inline-block;width:28px;height:18px}
+
+    /* Header/Hero */
+    header{background:linear-gradient(120deg,#000 0%,#0b1220 45%,#0b1220 55%,#000 100%);color:#fff}
+    .hero{max-width:1200px;margin:0 auto;padding:2.5rem 1rem 3rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem}
+    .badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.25);padding:.35rem .6rem;border-radius:999px;font-size:.85rem}
+    .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:.75rem;padding:.75rem 1rem;border:2px solid #fff;color:#000;background:#fff}
+    .btn.dark{background:transparent;color:#fff;border-color:#fff}
+    .btn.dark:hover{background:rgba(255,255,255,.1)}
+    .grid{display:grid;gap:1.25rem}
+
+    /* Sections */
+    section{padding:3rem 1rem;border-top:1px solid var(--border)}
+    .container{max-width:1200px;margin:0 auto}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem}
+
+    /* Hours + address */
+    .hours{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .hours dl{margin:0}
+    .hours dt{float:left;width:40%;color:var(--muted)}
+    .hours dd{margin:0 0 .35rem 40%;font-weight:600}
+
+    /* Reviews */
+    .stars{color:var(--star);font-size:1rem;letter-spacing:1px}
+    .reviews-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+    .review{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;display:flex;flex-direction:column;min-height:180px}
+    .review h4{margin:.2rem 0 .35rem 0}
+    .review small{color:var(--muted)}
+    .review .body{margin-top:.5rem;white-space:pre-line}
+    .load-more-wrap{display:flex;justify-content:center;margin-top:1rem}
+    .load-more{background:var(--accent);color:#fff;padding:.75rem 1rem;border-radius:.75rem;border:none;font-weight:700;cursor:pointer}
+
+    /* Contact */
+    form label{display:block;font-weight:600;margin:.5rem 0 .25rem}
+    form input, form textarea{width:100%;padding:.7rem;border-radius:.6rem;border:1px solid var(--border);background:var(--light)}
+    form textarea{min-height:120px}
+    form .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    form button{background:var(--blue);color:#fff;padding:.8rem 1rem;border:none;border-radius:.75rem;font-weight:700}
+    .map{border:0;width:100%;height:360px;border-radius:1rem}
+
+    /* Footer */
+    footer{background:#0b0b0b;color:#e5e7eb;padding:2rem 1rem;margin-top:2rem}
+    footer a{color:#e5e7eb;text-decoration:underline}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .hours{grid-template-columns:1fr}
+      form .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky top bar with instant tap-to-call -->
+  <div class="topbar" role="banner">
+    <div class="inner">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <!-- Accessible inline SVG American flag (at least one flag required) -->
+        <svg class="flag" viewBox="0 0 7410 3900" aria-label="American flag" role="img" xmlns="http://www.w3.org/2000/svg">
+          <rect width="7410" height="3900" fill="#b22234"/>
+          <path d="M0 450h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0" fill="#fff"/>
+          <rect width="2964" height="2100" fill="#3c3b6e"/>
+          <!-- 50 stars -->
+          <g fill="#fff">
+            <!-- 9 rows alternating 6 and 5 stars -->
+            <g id="s6"> 
+              <g id="s" transform="translate(247,210)"><polygon points="0,70 20,70 25,50 30,70 50,70 34,83 40,102 25,90 10,102 16,83"/></g>
+              <use href="#s" x="247"/><use href="#s" x="494"/><use href="#s" x="741"/><use href="#s" x="988"/><use href="#s" x="1235"/>
+            </g>
+            <use href="#s6" y="210"/><use href="#s6" y="420"/><use href="#s6" y="630"/><use href="#s6" y="840"/><use href="#s6" y="1050"/>
+          </g>
+        </svg>
+        <strong>Automotive Repair By George</strong>
+      </div>
+      <a class="callnow" href="tel:+14058232423" aria-label="Call Automotive Repair By George">
+        <!-- phone icon -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 4.2 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.09a2 2 0 0 1 2.11-.45c.84.27 1.71.45 2.61.57A2 2 0 0 1 22 16.92z" fill="#fff"/></svg>
+        <span>Call Now: (405) 823-2423</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header>
+    <div class="hero">
+      <div>
+        <h1 style="font-size:clamp(1.8rem,3.5vw,3rem);margin:.25rem 0 .5rem">Honest, Veteran-Owned Auto Repair in OKC</h1>
+        <p style="color:#d1d5db;max-width:60ch">Trustworthy diagnostics, fair pricing, and great communication from a shop that treats you like family. Located minutes from downtown: <strong>1217 NW 3rd St, Oklahoma City, OK 73106</strong>.</p>
+        <div class="badge-row" aria-label="identities">
+          <span class="badge" title="Identifies as veteran-owned">🇺🇸 Veteran-owned</span>
+          <span class="badge" title="Identifies as disabled-owned">♿ Disabled-owned</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn" href="tel:+14058232423">Call (405) 823-2423</a>
+          <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/place/Automotive+Repair+By+George.+LLC/@35.3648594,-99.0305034,8z/data=!4m12!1m2!2m1!1sAutomotive+Repair+By+George++%E2%80%ACauto+repair+ok!3m8!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!8m2!3d35.4711042!4d-97.5334624!9m1!1b1!15sCi5BdXRvbW90aXZlIFJlcGFpciBCeSBHZW9yZ2UgIOKArGF1dG8gcmVwYWlyIG9rWiwiKmF1dG9tb3RpdmUgcmVwYWlyIGJ5IGdlb3JnZSBhdXRvIHJlcGFpciBva5IBDmF1dG9fYm9keV9zaG9wqgGMAQoNL2cvMTFjbjN3NzlqegoHL20vMGs0agoIL20vMDVtcGgQASoVIhFhdXRvbW90aXZlIHJlcGFpcigAMh8QASIbSNw3H-Zb8kDA39BlGANi-0eTxjCcjRt45-8NMi4QAiIqYXV0b21vdGl2ZSByZXBhaXIgYnkgZ2VvcmdlIGF1dG8gcmVwYWlyIG9r4AEA!16s%2Fg%2F11cn3w79jz?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">Get Directions</a>
+          <!-- Square booking / checkout placeholder -->
+          <!-- Replace YOUR_LOCATION_ID below with your actual Square Location ID. Example usage shows a placeholder deep-link. -->
+          <a class="btn" id="square-book" href="#" target="_blank" rel="noopener">Book with Square</a>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card" aria-label="quick-stats">
+          <h3 style="margin-top:0">Shop Info</h3>
+          <div class="hours">
+            <dl>
+              <dt>Address</dt><dd>1217 NW 3rd St, Oklahoma City, OK 73106</dd>
+              <dt>Phone</dt><dd><a href="tel:+14058232423">(405) 823-2423</a></dd>
+              <dt>Notes</dt><dd>Hours might differ on holidays.</dd>
+            </dl>
+            <dl aria-label="hours">
+              <dt>Friday</dt><dd>8 AM–4 PM</dd>
+              <dt>Saturday</dt><dd>Closed</dd>
+              <dt>Sunday</dt><dd>Closed</dd>
+              <dt>Monday (Labor Day)</dt><dd>8 AM–4 PM</dd>
+              <dt>Tuesday</dt><dd>8 AM–4 PM</dd>
+              <dt>Wednesday</dt><dd>8 AM–4 PM</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Find Us</h3>
+          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!4v1690000000!6m8!1m7!1sCAoSLEFGMVFpcFA!2m2!1d35.4711042!2d-97.5334624!3f0!4f0!5f0.7820865974627469"></iframe>
+          <p style="margin-top:.5rem;color:var(--muted)">Above is an interactive Google map. If the embed fails, use the <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/Automotive+Repair+By+George.+LLC/@35.3648594,-99.0305034,8z/data=!4m12!1m2!2m1!1sAutomotive+Repair+By+George++%E2%80%ACauto+repair+ok!3m8!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!8m2!3d35.4711042!4d-97.5334624!9m1!1b1!15sCi5BdXRvbW90aXZlIFJlcGFpciBCeSBHZW9yZ2UgIOKArGF1dG8gcmVwYWlyIG9rWiwiKmF1dG9tb3RpdmUgcmVwYWlyIGJ5IGdlb3JnZSBhdXRvIHJlcGFpciBva5IBDmF1dG9fYm9keV9zaG9wqgGMAQoNL2cvMTFjbjN3NzlqegoHL20vMGs0agoIL20vMDVtcGgQASoVIhFhdXRvbW90aXZlIHJlcGFpcigAMh8QASIbSNw3H-Zb8kDA39BlGANi-0eTxjCcjRt45-8NMi4QAiIqYXV0b21vdGl2ZSByZXBhaXIgYnkgZ2VvcmdlIGF1dG8gcmVwYWlyIG9r4AEA!16s%2Fg%2F11cn3w79jz?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">full Google Maps link</a>.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- GALLERY / PICS -->
+  <section id="gallery">
+    <div class="container">
+      <h2 style="margin-top:0">Shop Photos</h2>
+      <div class="cards" aria-label="photo gallery">
+        <!-- Use your own photos; these are placeholders to be replaced in GitHub repo -->
+        <div class="card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop" alt="Mechanic working under the hood"></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1515923162065-9a52a0bbf15c?q=80&w=1200&auto=format&fit=crop" alt="Tool board at shop"></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1581833971339-4572c9d5b43e?q=80&w=1200&auto=format&fit=crop" alt="Engine diagnostics"></div>
+        <div class="card"><img src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=1200&auto=format&fit=crop" alt="Vehicle lift"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="container">
+      <h2 style="margin-top:0">Customer Reviews</h2>
+      <p style="color:var(--muted);max-width:65ch">Real customer feedback. All reviews shown are 5 stars except Jake Smith, which is 1 star. (Empty 5‑star reviews intentionally have no description.)</p>
+
+      <div id="reviewsList" class="reviews-list" aria-live="polite"></div>
+      <div class="load-more-wrap">
+        <button id="loadMore" class="load-more" type="button">Show more</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / EMAIL FORM -->
+  <section id="contact">
+    <div class="container">
+      <h2 style="margin-top:0">Contact</h2>
+      <div class="cards">
+        <div class="card">
+          <form id="emailForm" aria-label="email contact form">
+            <input type="hidden" id="squareLocationId" value="YOUR_LOCATION_ID"><!-- Replace YOUR_LOCATION_ID with your actual Square Location ID -->
+            <div class="row">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" required placeholder="Your name" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required placeholder="you@example.com" />
+              </div>
+            </div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" />
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" placeholder="Tell us what’s going on with your vehicle"></textarea>
+            <div style="display:flex;gap:.75rem;align-items:center;margin-top:.75rem">
+              <button type="submit">Send Email</button>
+              <a id="bookNow" class="btn dark" href="#" target="_blank" rel="noopener">Book with Square</a>
+            </div>
+            <p id="formStatus" style="margin-top:.5rem;color:var(--muted)"></p>
+          </form>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Call or Visit</h3>
+          <p><strong>Phone:</strong> <a href="tel:+14058232423">(405) 823-2423</a></p>
+          <p><strong>Address:</strong> 1217 NW 3rd St, Oklahoma City, OK 73106</p>
+          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=1217%20NW%203rd%20St%2C%20Oklahoma%20City%2C%20OK%2073106&output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center">
+      <div>
+        <strong>Automotive Repair By George</strong><br>
+        1217 NW 3rd St, Oklahoma City, OK 73106 · <a href="tel:+14058232423">(405) 823-2423</a>
+      </div>
+      <div>
+        <a href="https://github.com/JamesBrownR/Automotive-Repair-By-George" target="_blank" rel="noopener">GitHub Repo</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Schema.org LocalBusiness markup -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoRepair",
+    "name":"Automotive Repair By George",
+    "image":["https://images.unsplash.com/photo-1503376780353-7e6692767b70"],
+    "address":{"@type":"PostalAddress","streetAddress":"1217 NW 3rd St","addressLocality":"Oklahoma City","addressRegion":"OK","postalCode":"73106","addressCountry":"US"},
+    "telephone":"+14058232423",
+    "openingHoursSpecification":[
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday"],"opens":"08:00","closes":"16:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday"],"opens":"08:00","closes":"16:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Wednesday"],"opens":"08:00","closes":"16:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday"],"opens":"08:00","closes":"16:00"}
+    ],
+    "url":"https://github.com/JamesBrownR/Automotive-Repair-By-George",
+    "founder":"George",
+    "isAccessibleForFree":true
+  }
+  </script>
+
+  <script>
+    // --- Square booking deep link using YOUR_LOCATION_ID placeholder ---
+    (function(){
+      const loc = document.getElementById('squareLocationId').value.trim();
+      const bookBtn1 = document.getElementById('bookNow');
+      const bookBtn2 = document.getElementById('square-book');
+      // Typical Square booking URL pattern (replace YOUR_LOCATION_ID):
+      const sqUrl = loc && loc !== 'YOUR_LOCATION_ID'
+        ? `https://square.site/book/${encodeURIComponent(loc)}`
+        : '#';
+      [bookBtn1, bookBtn2].forEach(btn=>{ if(btn) btn.href = sqUrl; });
+    })();
+
+    // --- Email form: opens the user’s email client with prefilled message ---
+    document.getElementById('emailForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent(`New inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
+      const mailto = `mailto:autorepairbygeorge@gmail.com?subject=${subject}&body=${body}`; // replace email if needed
+      window.location.href = mailto;
+      document.getElementById('formStatus').textContent = 'Opening your email app…';
+    });
+
+    // --- Reviews data ---
+    // IMPORTANT: per client request, do not change the main content of the reviews.
+    const REVIEWS = [
+      {name:"Frank Hayden", stars:5, time:"a month ago", text:`I cannot recommend enough how great it is to know & have George fix my son’s car. George truly puts to customer first. I had a simple conversation with him I became an instant fan - the guy knows his cars and has empathy for your situation.
+
+Additionally I want to add that he is trustworthy and honest. Like a lot of gear heads, George is not a small talker unless it is about cars, engines & parts - he is a walking mechanics text book. Super impressed and I highly endorse.
+
+Seek him out if you are in the OKC area -`},
+      {name:"Lashawna Skipper", stars:5, time:"7 months ago", text:`Very hardworking guy. Stayed to fix my car in the blistering cold after hours. Kind person that is honest to issue with your vehicle. Communicates effectively. 100% recommend. Thank you for your dedication to the craft.`},
+      {name:"Johann Win", stars:5, time:"a year ago", text:`Excellent customer service! Had my car towed here the same day after not being able to start my car downtown (jump starting didn’t work) and George was able to replace the starter by the next day for a reasonable price. Reasonable price and my car starts like a brand new car.`},
+      {name:"Becki Anders", stars:5, time:"Edited 2 years ago", text:`I had a coolant leak and I couldn't drive my Jeep far without the engine overheating. A number of other shops I called first nearby couldn't look at my vehicle for days but when I spoke to George he was willing to fit me in right away. His … More`},
+      {name:"David Hershberger", stars:5, time:"a year ago", text:`I had George look at a 2012 Toyota Highlander that had not been driven in one year.  George is the best.  He did the work that needed to be done at a very reasonable price.  It's a very good thing to have a mechanic that you can trust.
+
+George is also a US Navy veteran.`},
+      {name:"Susan Ebert", stars:5, time:"2 years ago", text:`I had some body work done on my car. George’s skills are so intuitive and are matched by his truly wonderful customer service. Great communication, great experience. I will definitely go straight back to him when needed.`},
+      {name:"Mike Bli", stars:5, time:"6 years ago", text:`I recently had to my engine go out on my 2010 terrain, and the dealership that I bought it from told me it would be over $8000.00 to fix. I ended up looking online and finding the only place I will ever take a vehicle if I ever need to have … More`},
+      {name:"Cordia LaFontaine", stars:5, time:"5 years ago", text:`Took 2005 Lincoln Town Car to Service King after a wreck. They quoted me $5,000 repair estimate, but when the insurance totaled my vehicle they refused to fix it. George took my car and fixed it. He got my car in sooner than he said and … More`},
+      {name:"Amanda Garland", stars:5, time:"9 years ago", text:`George has been my auto mechanic for my family and I for many years. He has always been trustworthy and very reliable. He has always gotten my vehicle and I back in the road in a timely manner and very fair pricing. I would recommend him for all your vehicle needs!`},
+      {name:"Kay A", stars:5, time:"7 years ago", text:`I have taken my vehicle to George on a couple of occasions and been very pleased each time with the service.  He communicates very well before he does the work.  Being a single female that knows nothing about the mechanics of a vehicle, I do not feel taken advantage of. His cost is reasonable and I am not without my transportation for to long
+I intend on taking all my mechanic needs to him with ease.  Thanks George and I am sure you will see me again.`},
+      {name:"FTC Energy, Ltd.", stars:5, time:"4 years ago", text:`Hi George this is Jonathan with the Kia optima you worked your magic on. George is  an excellent, honest, and amazing mechanic. He will tell you all of the information about what the problem is and the different options available. His … More`},
+      {name:"Ashlee Parker", stars:5, time:"9 years ago", text:`George is extremely professional! Completes work in a timely manner! He took such great care of my vehicle, he called two weeks later and checked up on my vehicle!! What mechanic do you know that would do that? Such a wonderful shop.`},
+      {name:"Danny Egger", stars:5, time:"3 years ago", text:`Last week we visited Oklahoma City from the Dallas/Fort Worth area on our way to a weekend in Broken Bow.  When we arrived our car broke down.  Down on our luck we gave George a call.  He told us he was pretty busy but if we could get the … More`},
+      {name:"Jordan Karim", stars:5, time:"7 years ago", text:`George is a top-notch mechanic! Going the extra mile isn't ever seen as something extra with him. Making sure everything is done correctly and thoroughly is standard with George. I would trust him with everything from a simple oil change or … More`},
+      {name:"Cheyanne Osoria", stars:5, time:"5 years ago", text:`George is amazing! He truly cares about his clients and tries to give you the most affordable prices. He handles everything personally so I trust his opinion. I was a college student with no family and he always took care of my car needs with no hesistation! I love George!! More`},
+      {name:"Lily McFarland", stars:5, time:"Edited 9 months ago", text:`Great service! Very nice and honest. Highly recommend! Very efficient and explained everything well to us.
+We were on a trip there and he was very understanding and helpful. He really did so much for us and we can’t thank him enough.`},
+      {name:"Joey Wakim", stars:5, time:"9 years ago", text:`George is incredibly knowledgeable in the automotive industry, and it shows. It's been his passion his entire life. His service is unparalleled, and he genuinely puts the customer first when it comes to getting your car up and running again. Highly recommended!!`},
+      {name:"TJ “Tjduncan1998” Duncan", stars:5, time:"6 years ago", text:`George was the saving grace of Thanksgiving break. A day after thanksgiving while visiting my parents, we were all from out of town, my car started squealing like rusty train. George took my car in, was extremely communicative and flexible, … More`},
+      {name:"Tracy Hurd", stars:5, time:"7 years ago", text:`George is man to see if you want to support a local business, an honest man and veteran. He does high quality work. George even called to make sure the vehicle made it safely to Florida! I have a mechanic I can trust in OKC. THANKS GEORGE!`},
+      {name:"Daniel Mac Kenzie", stars:5, time:"3 years ago", text:`George has been doing work on my cars since I moved to the city 2 years ago,  he is very professional and amazing Mechanic, it’s hard to find someone to work on Mercedes and he is way better priced than the dealership.  He is worth very penny I spent. More`},
+      {name:"Brian Jacobsen", stars:5, time:"8 years ago", text:`Just went for the first time and couldn't be happier with my experience.  I found George and his crew both competent and professional!  The fact they were friendly was a bonus!  Make George your mechanic you'll be glad you did.`},
+      {name:"Esther Bird", stars:5, time:"6 years ago", text:`I highly recommend this place. My sons and I were stranded after our car broke down. George went the extra mile to repair it for us at an affordable price and had us back on the road safely ASAP. He was super friendly and great about explaining what needed to be fixed etc. Customer Service and Repair were top notch.`},
+      {name:"Baylee Keyworth", stars:5, time:"4 years ago", text:`So helpful. We were driving to OKC to buy a used car and needed an inspection. While he couldn’t get us in that day he sat on the phone with me for 20 minutes and had me makes detailed notes of each thing to check and what it meant. Very valuable advise! Thankful!`},
+      {name:"Amir Alavi", stars:5, time:"7 years ago", text:`This is a great mechanic shop.   The owner is a straight shooter. No BS over here. The work is done properly and George stands by his  warranty. … More`},
+      {name:"Sean", stars:5, time:"a year ago", text:`Had a great experience! George got my car taken care of for a great price and had awesome communication throughout the process`},
+      {name:"Jake Smith", stars:1, time:"a year ago", text:`When I first brought my car in to him I told him I need everything that’s wrong fixed an he agrees like it’s no problem, so he told me give him a month an took over 3 months to work on my car an when it’s time to pay I paid him $3,000 just … More`},
+      {name:"Carrie Walker", stars:5, time:"6 years ago", text:`So thankful I found you George! George got me home safe and sound when everyone else said they were busy. And charged a fair price to boot. Would recommend to anyone.`},
+      {name:"Dean", stars:5, time:"5 years ago", text:`The best mechanic around and saved me lots of money.  My wife's Camaro runs butter than when she first purchased it. … More`},
+      {name:"Elizabeth Vassar", stars:5, time:"Edited 8 years ago", text:`Awesome mechanic! I'll never take my car to anyone else. Knowledgeable,  respectful and honest. The price is always reasonable. You won't find anyone more reliable!`},
+      {name:"Douglas Hammann", stars:5, time:"5 years ago", text:`George saw my car on very short notice, and charged a very reasonable price, as well as called me daily to keep me updated on what was going on. Great service all around!`},
+      {name:"Deeb Haddad", stars:5, time:"9 years ago", text:`I would recommend George over any other mechanic. I know there are other good mechanics out there but George knows how to fix and solve problems quickly and give a price for the fix that is so afordable it's like I found my mechanic alright.`},
+      {name:"Alicia Shaw", stars:5, time:"9 years ago", text:`highly knowledgeable and dependable at an insanely affordable price! I can't tell you how many times this business has got my wheels back on the road!! 5 stars for sure!`},
+      {name:"Clint Blackburn", stars:5, time:"4 years ago", text:`I had them put a transmission in my truck, amazing people that went way out of their way to make me happy and fix my truck. I will definitely be using them again. More`},
+      {name:"Chelsea Haddad", stars:5, time:"Edited a year ago", text:`Awesome service. George has always been honest, and I know it will be done right the first time.
+Serv…
+More`},
+      {name:"Cody Garcia", stars:5, time:"8 years ago", text:`This guy knows his stuff! Helped me with my Lincoln for a great deel. My throttle body was cracked, and he saw it right off.`},
+      {name:"Cecca Britt", stars:5, time:"Edited 3 years ago", text:`Decent guy! Not exactly the most experienced in small fords but a kind guy who tries to help!`},
+      {name:"DERWIN ROMANI", stars:5, time:"Edited 3 years ago", text:`Positive
+Quality, Professionalism…
+More`},
+      {name:"Cris Joy U Haddad", stars:5, time:"2 years ago", text:""},
+      {name:"Cristin Mercer", stars:5, time:"6 years ago", text:""}
+    ];
+
+    // Render first 6, then reveal in batches of 6. Button should show remaining count.
+    const listEl = document.getElementById('reviewsList');
+    const btn = document.getElementById('loadMore');
+    let shown = 0;
+
+    function starString(n){
+      const full = '★'.repeat(n), empty = '☆'.repeat(5-n);
+      return `<span class="stars" aria-label="${n} out of 5 stars">${full}${empty}</span>`;
+    }
+
+    function renderNext(batch=6){
+      const slice = REVIEWS.slice(shown, shown+batch);
+      slice.forEach(r=>{
+        const card = document.createElement('article');
+        card.className = 'review';
+        card.innerHTML = `
+          <div>${starString(r.stars)}</div>
+          <h4>${r.name}</h4>
+          <small>${r.time}</small>
+          <div class="body">${r.text ? r.text.replace(/\n/g,'<br>') : ''}</div>
+        `;
+        listEl.appendChild(card);
+      });
+      shown += slice.length;
+      const remaining = REVIEWS.length - shown;
+      if (remaining > 0){
+        btn.textContent = `Show ${remaining > 6 ? 6 : remaining} more (total ${remaining})`;
+        btn.style.display = 'inline-flex';
+      } else {
+        btn.style.display = 'none';
+      }
+    }
+
+    btn.addEventListener('click', ()=>renderNext(6));
+    renderNext(6);
+  </script>
+</body>
+</html>
