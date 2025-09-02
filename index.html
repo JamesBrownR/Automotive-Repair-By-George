@@ -331,36 +331,43 @@
   }
   </script>
 
-  <script>
-    // --- Square booking deep link using YOUR_LOCATION_ID placeholder ---
-    (function(){
-      const loc = document.getElementById('squareLocationId').value.trim();
-      const bookBtn1 = document.getElementById('bookNow');
-      const bookBtn2 = document.getElementById('square-book');
-      // Typical Square booking URL pattern (replace YOUR_LOCATION_ID):
-      const sqUrl = loc && loc !== 'YOUR_LOCATION_ID'
-        ? `https://square.site/book/${encodeURIComponent(loc)}`
-        : '#';
-      [bookBtn1, bookBtn2].forEach(btn=>{ if(btn) btn.href = sqUrl; });
-    })();
+ <script>
+  // --- Square booking deep link (safe version) ---
+  (function(){
+    const locEl = document.getElementById('squareLocationId');
+    const bookBtn1 = document.getElementById('bookNow');
+    const bookBtn2 = document.getElementById('square-book');
+    const loc = locEl ? locEl.value.trim() : '';
 
-    // --- Email form: opens the user's email client with prefilled message ---
-    document.getElementById('emailForm').addEventListener('submit', function(e){
+    const sqUrl = loc && loc !== 'YOUR_LOCATION_ID'
+      ? `https://square.site/book/${encodeURIComponent(loc)}`
+      : '#';
+
+    [bookBtn1, bookBtn2].forEach(btn => {
+      if (btn) btn.href = sqUrl;
+    });
+  })();
+
+  // --- Email form (safe version) ---
+  const emailForm = document.getElementById('emailForm');
+  if (emailForm) {
+    emailForm.addEventListener('submit', function(e){
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const message = document.getElementById('message').value.trim();
+      const name = document.getElementById('name')?.value.trim() || '';
+      const email = document.getElementById('email')?.value.trim() || '';
+      const phone = document.getElementById('phone')?.value.trim() || '';
+      const message = document.getElementById('message')?.value.trim() || '';
       const subject = encodeURIComponent(`New inquiry from ${name}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`);
-      const mailto = `mailto:autorepairbygeorge@gmail.com?subject=${subject}&body=${body}`; // replace email if needed
+      const mailto = `mailto:autorepairbygeorge@gmail.com?subject=${subject}&body=${body}`;
       window.location.href = mailto;
-      document.getElementById('formStatus').textContent = 'Opening your email app…';
+      const statusEl = document.getElementById('formStatus');
+      if (statusEl) statusEl.textContent = 'Opening your email app…';
     });
+  }
 
-    // --- Reviews data ---
-    // IMPORTANT: per client request, do not change the main content of the reviews.
-    const REVIEWS = [
+  // --- Reviews data ---
+  const REVIEWS = [
       {name:"Frank Hayden", stars:5, time:"a month ago", text:`I cannot recommend enough how great it is to know & have George fix my son's car. George truly puts to customer first. I had a simple conversation with him I became an instant fan - the guy knows his cars and has empathy for your situation.
 
 Additionally I want to add that he is trustworthy and honest. Like a lot of gear heads, George is not a small talker unless it is about cars, engines & parts - he is a walking mechanics text book. Super impressed and I highly endorse.
@@ -413,44 +420,45 @@ More`},
       {name:"Cris Joy U Haddad", stars:5, time:"2 years ago", text:""},
       {name:"Cristin Mercer", stars:5, time:"6 years ago", text:""} ];
 
-// Render first 6, then reveal in batches of 6. Button should show remaining count.
-const listEl = document.getElementById('reviewsList');
-const btn = document.getElementById('loadMore');
-let shown = 0;
 
+  // --- Reviews renderer ---
+  const listEl = document.getElementById('reviewsList');
+  const btn = document.getElementById('loadMore');
+  let shown = 0;
 
-function starString(n){
-const full = '★'.repeat(n), empty = '☆'.repeat(5-n);
-return `<span class="stars" aria-label="${n} out of 5 stars">${full}${empty}</span>`;
-}
+  function starString(n){
+    const full = '★'.repeat(n), empty = '☆'.repeat(5-n);
+    return `<span class="stars" aria-label="${n} out of 5 stars">${full}${empty}</span>`;
+  }
 
+  function renderNext(batch=6){
+    const slice = REVIEWS.slice(shown, shown+batch);
+    slice.forEach(r=>{
+      const card = document.createElement('article');
+      card.className = 'review';
+      card.innerHTML = `
+        <div>${starString(r.stars)}</div>
+        <h4>${r.name}</h4>
+        <small>${r.time}</small>
+        <div class="body">${r.text ? r.text.replace(/\n/g,'<br>') : ''}</div>
+      `;
+      listEl.appendChild(card);
+    });
+    shown += slice.length;
+    const remaining = REVIEWS.length - shown;
+    if (remaining > 0){
+      btn.textContent = `Show ${remaining > 6 ? 6 : remaining} more (total ${remaining})`;
+      btn.style.display = 'inline-flex';
+    } else {
+      btn.style.display = 'none';
+    }
+  }
 
-function renderNext(batch=6){
-const slice = REVIEWS.slice(shown, shown+batch);
-slice.forEach(r=>{
-const card = document.createElement('article');
-card.className = 'review';
-card.innerHTML = `
-<div>${starString(r.stars)}</div>
-<h4>${r.name}</h4>
-<small>${r.time}</small>
-<div class="body">${r.text ? r.text.replace(/\n/g,'<br>') : ''}</div>
-`;
-listEl.appendChild(card);
-});
-shown += slice.length;
-const remaining = REVIEWS.length - shown;
-if (remaining > 0){
-btn.textContent = `Show ${remaining > 6 ? 6 : remaining} more (total ${remaining})`;
-btn.style.display = 'inline-flex';
-} else {
-btn.style.display = 'none';
-}
-}
-
-
-btn.addEventListener('click', ()=>renderNext(6));
-renderNext(6);
+  if (btn && listEl) {
+    btn.addEventListener('click', ()=>renderNext(6));
+    renderNext(6);
+  }
 </script>
+
 </body>
 </html>
