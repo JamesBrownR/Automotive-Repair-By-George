@@ -25,56 +25,100 @@
     }
     *{box-sizing:border-box}
     html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
-    a{color:var(--blue);text-decoration:none}
+    a{color:var(--blue);text-decoration:none;transition:all 0.3s ease}
     img{max-width:100%;display:block}
 
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+    .slide-in-left { animation: slideInLeft 0.6s ease-out; }
+    .slide-in-right { animation: slideInRight 0.6s ease-out; }
+
     /* Top contact bar */
-    .topbar{position:sticky;top:0;z-index:50;background:#000;color:#fff}
+    .topbar{position:sticky;top:0;z-index:50;background:#000;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
     .topbar .inner{max-width:1200px;margin:0 auto;padding:.5rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between}
-    .callnow{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;padding:.5rem .9rem;border-radius:999px;font-weight:700;border:2px solid transparent}
-    .callnow:hover{filter:brightness(1.05)}
-    .flag{display:inline-block;width:28px;height:18px}
+    .callnow{display:inline-flex;align-items:center;gap:.5rem;background:var(--red);color:#fff;padding:.5rem .9rem;border-radius:999px;font-weight:700;border:2px solid transparent;transition:all 0.3s ease}
+    .callnow:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 12px rgba(239,68,68,0.3)}
+    .flag{display:inline-block;width:28px;height:18px;transition:transform 0.3s ease}
+    .flag:hover{transform:scale(1.1)}
 
     /* Header/Hero */
-    header{background:linear-gradient(120deg,#000 0%,#0b1220 45%,#0b1220 55%,#000 100%);color:#fff}
-    .hero{max-width:1200px;margin:0 auto;padding:2.5rem 1rem 3rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem}
+    header{background:linear-gradient(120deg,#000 0%,#0b1220 45%,#0b1220 55%,#000 100%);color:#fff;position:relative;overflow:hidden}
+    header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%, rgba(37,99,235,0.1) 0%, transparent 50%);pointer-events:none}
+    .hero{max-width:1200px;margin:0 auto;padding:2.5rem 1rem 3rem;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;position:relative;z-index:1}
     .badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
-    .badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.25);padding:.35rem .6rem;border-radius:999px;font-size:.85rem}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(255,255,255,.25);padding:.35rem .6rem;border-radius:999px;font-size:.85rem;transition:all 0.3s ease;backdrop-filter:blur(10px)}
+    .badge:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05);transform:translateY(-2px)}
     .cta-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:.75rem;padding:.75rem 1rem;border:2px solid #fff;color:#000;background:#fff}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;border-radius:.75rem;padding:.75rem 1rem;border:2px solid #fff;color:#000;background:#fff;transition:all 0.3s ease;text-transform:uppercase;letter-spacing:0.5px}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,255,255,0.2)}
     .btn.dark{background:transparent;color:#fff;border-color:#fff}
-    .btn.dark:hover{background:rgba(255,255,255,.1)}
+    .btn.dark:hover{background:rgba(255,255,255,.1);border-color:#fff}
     .grid{display:grid;gap:1.25rem}
 
     /* Sections */
-    section{padding:3rem 1rem;border-top:1px solid var(--border)}
+    section{padding:3rem 1rem;border-top:1px solid var(--border);position:relative}
     .container{max-width:1200px;margin:0 auto}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;transition:all 0.3s ease;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
+    .card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(0,0,0,0.1);border-color:var(--blue)}
 
-    /* Hours + address */
-    .hours{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .hours dl{margin:0}
-    .hours dt{float:left;width:40%;color:var(--muted)}
-    .hours dd{margin:0 0 .35rem 40%;font-weight:600}
+    /* Hours + address - IMPROVED LAYOUT */
+    .shop-info-content{display:grid;grid-template-columns:1fr;gap:2rem}
+    .contact-info{display:grid;gap:1rem}
+    .info-item{display:flex;flex-direction:column;gap:0.25rem}
+    .info-label{color:var(--muted);font-size:0.9rem;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+    .info-value{font-weight:600;color:var(--text)}
+    .hours-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:1rem;margin-top:1rem}
+    .day-hours{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0.75rem;background:var(--light);border-radius:0.5rem;transition:all 0.3s ease}
+    .day-hours:hover{background:rgba(37,99,235,0.05);transform:translateX(4px)}
+    .day-name{font-weight:600;color:var(--text)}
+    .day-time{color:var(--muted);font-size:0.9rem}
+    .day-time.closed{color:var(--red);font-weight:500}
+    .day-time.open{color:var(--green);font-weight:500}
 
     /* Reviews */
     .stars{color:var(--star);font-size:1rem;letter-spacing:1px}
     .reviews-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
-    .review{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;display:flex;flex-direction:column;min-height:180px}
+    .review{background:var(--card);border:1px solid var(--border);border-radius:1rem;padding:1rem;display:flex;flex-direction:column;min-height:180px;transition:all 0.3s ease;animation:fadeInUp 0.6s ease-out}
+    .review:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.1)}
     .review h4{margin:.2rem 0 .35rem 0}
     .review small{color:var(--muted)}
     .review .body{margin-top:.5rem;white-space:pre-line}
     .load-more-wrap{display:flex;justify-content:center;margin-top:1rem}
-    .load-more{background:var(--accent);color:#fff;padding:.75rem 1rem;border-radius:.75rem;border:none;font-weight:700;cursor:pointer}
+    .load-more{background:var(--accent);color:#fff;padding:.75rem 1rem;border-radius:.75rem;border:none;font-weight:700;cursor:pointer;transition:all 0.3s ease}
+    .load-more:hover{background:var(--blue);transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,99,235,0.3)}
 
     /* Contact */
-    form label{display:block;font-weight:600;margin:.5rem 0 .25rem}
-    form input, form textarea{width:100%;padding:.7rem;border-radius:.6rem;border:1px solid var(--border);background:var(--light)}
-    form textarea{min-height:120px}
+    form label{display:block;font-weight:600;margin:.5rem 0 .25rem;color:var(--text)}
+    form input, form textarea{width:100%;padding:.7rem;border-radius:.6rem;border:1px solid var(--border);background:var(--light);transition:all 0.3s ease}
+    form input:focus, form textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,0.1);background:#fff}
+    form textarea{min-height:120px;resize:vertical}
     form .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    form button{background:var(--blue);color:#fff;padding:.8rem 1rem;border:none;border-radius:.75rem;font-weight:700}
-    .map{border:0;width:100%;height:360px;border-radius:1rem}
+    form button{background:var(--blue);color:#fff;padding:.8rem 1rem;border:none;border-radius:.75rem;font-weight:700;transition:all 0.3s ease;cursor:pointer}
+    form button:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 4px 12px rgba(37,99,235,0.3)}
+    .map{border:0;width:100%;height:360px;border-radius:1rem;transition:all 0.3s ease}
+    .map:hover{box-shadow:0 8px 25px rgba(0,0,0,0.15)}
+
+    /* Gallery hover effects */
+    .cards img{transition:transform 0.3s ease;border-radius:0.75rem}
+    .cards .card:hover img{transform:scale(1.05)}
 
     /* Footer */
     footer{background:#0b0b0b;color:#e5e7eb;padding:2rem 1rem;margin-top:2rem}
@@ -83,9 +127,17 @@
     /* Responsive */
     @media (max-width:900px){
       .hero{grid-template-columns:1fr}
-      .hours{grid-template-columns:1fr}
+      .shop-info-content{grid-template-columns:1fr}
+      .hours-grid{grid-template-columns:1fr}
       form .row{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
     }
+
+    /* Add stagger animation for cards */
+    .cards .card:nth-child(1) { animation-delay: 0.1s; }
+    .cards .card:nth-child(2) { animation-delay: 0.2s; }
+    .cards .card:nth-child(3) { animation-delay: 0.3s; }
+    .cards .card:nth-child(4) { animation-delay: 0.4s; }
   </style>
 </head>
 <body>
@@ -93,7 +145,7 @@
   <div class="topbar" role="banner">
     <div class="inner">
       <div style="display:flex;align-items:center;gap:.75rem">
-        <!-- Accessible inline SVG American flag (at least one flag required) -->
+        <!-- Accessible inline SVG American flag -->
         <svg class="flag" viewBox="0 0 7410 3900" aria-label="American flag" role="img" xmlns="http://www.w3.org/2000/svg">
           <rect width="7410" height="3900" fill="#b22234"/>
           <path d="M0 450h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0zm0 600h7410v300H0" fill="#fff"/>
@@ -121,7 +173,7 @@
   <!-- HERO -->
   <header>
     <div class="hero">
-      <div>
+      <div class="slide-in-left">
         <h1 style="font-size:clamp(1.8rem,3.5vw,3rem);margin:.25rem 0 .5rem">Honest, Veteran-Owned Auto Repair in OKC</h1>
         <p style="color:#d1d5db;max-width:60ch">Trustworthy diagnostics, fair pricing, and great communication from a shop that treats you like family. Located minutes from downtown: <strong>1217 NW 3rd St, Oklahoma City, OK 73106</strong>.</p>
         <div class="badge-row" aria-label="identities">
@@ -130,35 +182,60 @@
         </div>
         <div class="cta-row">
           <a class="btn" href="tel:+14058232423">Call (405) 823-2423</a>
-          <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/place/Automotive+Repair+By+George.+LLC/@35.3648594,-99.0305034,8z/data=!4m12!1m2!2m1!1sAutomotive+Repair+By+George++%E2%80%ACauto+repair+ok!3m8!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!8m2!3d35.4711042!4d-97.5334624!9m1!1b1!15sCi5BdXRvbW90aXZlIFJlcGFpciBCeSBHZW9yZ2UgIOKArGF1dG8gcmVwYWlyIG9rWiwiKmF1dG9tb3RpdmUgcmVwYWlyIGJ5IGdlb3JnZSBhdXRvIHJlcGFpciBva5IBDmF1dG9fYm9keV9zaG9wqgGMAQoNL2cvMTFjbjN3NzlqegoHL20vMGs0agoIL20vMDVtcGgQASoVIhFhdXRvbW90aXZlIHJlcGFpcigAMh8QASIbSNw3H-Zb8kDA39BlGANi-0eTxjCcjRt45-8NMi4QAiIqYXV0b21vdGl2ZSByZXBhaXIgYnkgZ2VvcmdlIGF1dG8gcmVwYWlyIG9r4AEA!16s%2Fg%2F11cn3w79jz?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">Get Directions</a>
+          <a class="btn dark" target="_blank" rel="noopener" href="https://www.google.com/maps/place/Automotive+Repair+By+George.+LLC/@35.4709876,-97.5334237,15z/data=!4m15!1m7!3m6!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!2sAutomotive+Repair+By+George.+LLC!8m2!3d35.4711042!4d-97.5334624!16s%2Fg%2F11cn3w79jz!3m6!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!8m2!3d35.4711042!4d-97.5334624!15sCi5BdXRvbW90aXZlIFJlcGFpciBCeSBHZW9yZ2UgIOKArGF1dG8gcmVwYWlyIG9rWiwiKmF1dG9tb3RpdmUgcmVwYWlyIGJ5IGdlb3JnZSBhdXRvIHJlcGFpciBva5IBDmF1dG9fYm9keV9zaG9wqgGMAQoNL2cvMTFjbjN3NzlqegoHL20vMGs0agoIL20vMDVtcGgQASoVIhFhdXRvbW90aXZlIHJlcGFpcigAMh8QASIbSNw3H-Zb8kDA39BlGANi-0eTxjCcjRt45-8NMi4QAiIqYXV0b21vdGl2ZSByZXBhaXIgYnkgZ2VvcmdlIGF1dG8gcmVwYWlyIG9r4AEA!16s%2Fg%2F11cn3w79jz?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">Get Directions</a>
           <!-- Square booking / checkout placeholder -->
           <!-- Replace YOUR_LOCATION_ID below with your actual Square Location ID. Example usage shows a placeholder deep-link. -->
           <a class="btn" id="square-book" href="#" target="_blank" rel="noopener">Book with Square</a>
         </div>
       </div>
-      <div class="grid">
+      <div class="grid slide-in-right">
         <div class="card" aria-label="quick-stats">
           <h3 style="margin-top:0">Shop Info</h3>
-          <div class="hours">
-            <dl>
-              <dt>Address</dt><dd>1217 NW 3rd St, Oklahoma City, OK 73106</dd>
-              <dt>Phone</dt><dd><a href="tel:+14058232423">(405) 823-2423</a></dd>
-              <dt>Notes</dt><dd>Hours might differ on holidays.</dd>
-            </dl>
-            <dl aria-label="hours">
-              <dt>Friday</dt><dd>8 AM–4 PM</dd>
-              <dt>Saturday</dt><dd>Closed</dd>
-              <dt>Sunday</dt><dd>Closed</dd>
-              <dt>Monday (Labor Day)</dt><dd>8 AM–4 PM</dd>
-              <dt>Tuesday</dt><dd>8 AM–4 PM</dd>
-              <dt>Wednesday</dt><dd>8 AM–4 PM</dd>
-            </dl>
+          <div class="shop-info-content">
+            <div class="contact-info">
+              <div class="info-item">
+                <span class="info-label">Address</span>
+                <span class="info-value">1217 NW 3rd St, Oklahoma City, OK 73106</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Phone</span>
+                <span class="info-value"><a href="tel:+14058232423">(405) 823-2423</a></span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Notes</span>
+                <span class="info-value">Hours might differ on holidays.</span>
+              </div>
+            </div>
+            <div class="hours-section">
+              <h4 style="margin:0 0 1rem 0;color:var(--text)">Business Hours</h4>
+              <div class="hours-grid">
+                <div class="day-hours">
+                  <span class="day-name">Friday</span>
+                  <span class="day-time open">8 AM–4 PM</span>
+                </div>
+                <div class="day-hours">
+                  <span class="day-name">Saturday</span>
+                  <span class="day-time closed">Closed</span>
+                </div>
+                <div class="day-hours">
+                  <span class="day-name">Sunday</span>
+                  <span class="day-time closed">Closed</span>
+                </div>
+                <div class="day-hours">
+                  <span class="day-name">Monday (Labor Day)</span>
+                  <span class="day-time open">8 AM–4 PM</span>
+                </div>
+                <div class="day-hours">
+                  <span class="day-name">Tuesday</span>
+                  <span class="day-time open">8 AM–4 PM</span>
+                </div>
+                <div class="day-hours">
+                  <span class="day-name">Wednesday</span>
+                  <span class="day-time open">8 AM–4 PM</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0">Find Us</h3>
-          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!4v1690000000!6m8!1m7!1sCAoSLEFGMVFpcFA!2m2!1d35.4711042!2d-97.5334624!3f0!4f0!5f0.7820865974627469"></iframe>
-          <p style="margin-top:.5rem;color:var(--muted)">Above is an interactive Google map. If the embed fails, use the <a target="_blank" rel="noopener" href="https://www.google.com/maps/place/Automotive+Repair+By+George.+LLC/@35.3648594,-99.0305034,8z/data=!4m12!1m2!2m1!1sAutomotive+Repair+By+George++%E2%80%ACauto+repair+ok!3m8!1s0x87b2055b7ef96f0f:0xa5d4145ef4983358!8m2!3d35.4711042!4d-97.5334624!9m1!1b1!15sCi5BdXRvbW90aXZlIFJlcGFpciBCeSBHZW9yZ2UgIOKArGF1dG8gcmVwYWlyIG9rWiwiKmF1dG9tb3RpdmUgcmVwYWlyIGJ5IGdlb3JnZSBhdXRvIHJlcGFpciBva5IBDmF1dG9fYm9keV9zaG9wqgGMAQoNL2cvMTFjbjN3NzlqegoHL20vMGs0agoIL20vMDVtcGgQASoVIhFhdXRvbW90aXZlIHJlcGFpcigAMh8QASIbSNw3H-Zb8kDA39BlGANi-0eTxjCcjRt45-8NMi4QAiIqYXV0b21vdGl2ZSByZXBhaXIgYnkgZ2VvcmdlIGF1dG8gcmVwYWlyIG9r4AEA!16s%2Fg%2F11cn3w79jz?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D">full Google Maps link</a>.</p>
         </div>
       </div>
     </div>
@@ -167,8 +244,8 @@
   <!-- GALLERY / PICS -->
   <section id="gallery">
     <div class="container">
-      <h2 style="margin-top:0">Shop Photos</h2>
-      <div class="cards" aria-label="photo gallery">
+      <h2 style="margin-top:0" class="fade-in-up">Shop Photos</h2>
+      <div class="cards fade-in-up" aria-label="photo gallery">
         <!-- Use your own photos; these are placeholders to be replaced in GitHub repo -->
         <div class="card"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop" alt="Mechanic working under the hood"></div>
         <div class="card"><img src="https://images.unsplash.com/photo-1515923162065-9a52a0bbf15c?q=80&w=1200&auto=format&fit=crop" alt="Tool board at shop"></div>
@@ -181,8 +258,8 @@
   <!-- REVIEWS -->
   <section id="reviews">
     <div class="container">
-      <h2 style="margin-top:0">Customer Reviews</h2>
-      <p style="color:var(--muted);max-width:65ch">Real customer feedback. All reviews shown are 5 stars except Jake Smith, which is 1 star. (Empty 5‑star reviews intentionally have no description.)</p>
+      <h2 style="margin-top:0" class="fade-in-up">Customer Reviews</h2>
+      <p style="color:var(--muted);max-width:65ch" class="fade-in-up">Real customer feedback. All reviews shown are 5 stars except Jake Smith, which is 1 star. (Empty 5‑star reviews intentionally have no description.)</p>
 
       <div id="reviewsList" class="reviews-list" aria-live="polite"></div>
       <div class="load-more-wrap">
@@ -194,8 +271,8 @@
   <!-- CONTACT / EMAIL FORM -->
   <section id="contact">
     <div class="container">
-      <h2 style="margin-top:0">Contact</h2>
-      <div class="cards">
+      <h2 style="margin-top:0" class="fade-in-up">Contact</h2>
+      <div class="cards fade-in-up">
         <div class="card">
           <form id="emailForm" aria-label="email contact form">
             <input type="hidden" id="squareLocationId" value="YOUR_LOCATION_ID"><!-- Replace YOUR_LOCATION_ID with your actual Square Location ID -->
@@ -212,7 +289,7 @@
             <label for="phone">Phone</label>
             <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" />
             <label for="message">How can we help?</label>
-            <textarea id="message" name="message" placeholder="Tell us what’s going on with your vehicle"></textarea>
+            <textarea id="message" name="message" placeholder="Tell us what's going on with your vehicle"></textarea>
             <div style="display:flex;gap:.75rem;align-items:center;margin-top:.75rem">
               <button type="submit">Send Email</button>
               <a id="bookNow" class="btn dark" href="#" target="_blank" rel="noopener">Book with Square</a>
@@ -224,20 +301,17 @@
           <h3 style="margin-top:0">Call or Visit</h3>
           <p><strong>Phone:</strong> <a href="tel:+14058232423">(405) 823-2423</a></p>
           <p><strong>Address:</strong> 1217 NW 3rd St, Oklahoma City, OK 73106</p>
-          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=1217%20NW%203rd%20St%2C%20Oklahoma%20City%2C%20OK%2073106&output=embed"></iframe>
+          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3248.8234567890123!2d-97.5334624!3d35.4711042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b2055b7ef96f0f%3A0xa5d4145ef4983358!2sAutomotive%20Repair%20By%20George.%20LLC!5e0!3m2!1sen!2sus!4v1690000000!5m2!1sen!2sus"></iframe>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center">
-      <div>
+    <div class="container" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center">
+      <div style="text-align:center">
         <strong>Automotive Repair By George</strong><br>
         1217 NW 3rd St, Oklahoma City, OK 73106 · <a href="tel:+14058232423">(405) 823-2423</a>
-      </div>
-      <div>
-        <a href="https://github.com/JamesBrownR/Automotive-Repair-By-George" target="_blank" rel="noopener">GitHub Repo</a>
       </div>
     </div>
   </footer>
@@ -276,7 +350,7 @@
       [bookBtn1, bookBtn2].forEach(btn=>{ if(btn) btn.href = sqUrl; });
     })();
 
-    // --- Email form: opens the user’s email client with prefilled message ---
+    // --- Email form: opens the user's email client with prefilled message ---
     document.getElementById('emailForm').addEventListener('submit', function(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
@@ -293,18 +367,18 @@
     // --- Reviews data ---
     // IMPORTANT: per client request, do not change the main content of the reviews.
     const REVIEWS = [
-      {name:"Frank Hayden", stars:5, time:"a month ago", text:`I cannot recommend enough how great it is to know & have George fix my son’s car. George truly puts to customer first. I had a simple conversation with him I became an instant fan - the guy knows his cars and has empathy for your situation.
+      {name:"Frank Hayden", stars:5, time:"a month ago", text:`I cannot recommend enough how great it is to know & have George fix my son's car. George truly puts to customer first. I had a simple conversation with him I became an instant fan - the guy knows his cars and has empathy for your situation.
 
 Additionally I want to add that he is trustworthy and honest. Like a lot of gear heads, George is not a small talker unless it is about cars, engines & parts - he is a walking mechanics text book. Super impressed and I highly endorse.
 
 Seek him out if you are in the OKC area -`},
       {name:"Lashawna Skipper", stars:5, time:"7 months ago", text:`Very hardworking guy. Stayed to fix my car in the blistering cold after hours. Kind person that is honest to issue with your vehicle. Communicates effectively. 100% recommend. Thank you for your dedication to the craft.`},
-      {name:"Johann Win", stars:5, time:"a year ago", text:`Excellent customer service! Had my car towed here the same day after not being able to start my car downtown (jump starting didn’t work) and George was able to replace the starter by the next day for a reasonable price. Reasonable price and my car starts like a brand new car.`},
+      {name:"Johann Win", stars:5, time:"a year ago", text:`Excellent customer service! Had my car towed here the same day after not being able to start my car downtown (jump starting didn't work) and George was able to replace the starter by the next day for a reasonable price. Reasonable price and my car starts like a brand new car.`},
       {name:"Becki Anders", stars:5, time:"Edited 2 years ago", text:`I had a coolant leak and I couldn't drive my Jeep far without the engine overheating. A number of other shops I called first nearby couldn't look at my vehicle for days but when I spoke to George he was willing to fit me in right away. His … More`},
       {name:"David Hershberger", stars:5, time:"a year ago", text:`I had George look at a 2012 Toyota Highlander that had not been driven in one year.  George is the best.  He did the work that needed to be done at a very reasonable price.  It's a very good thing to have a mechanic that you can trust.
 
 George is also a US Navy veteran.`},
-      {name:"Susan Ebert", stars:5, time:"2 years ago", text:`I had some body work done on my car. George’s skills are so intuitive and are matched by his truly wonderful customer service. Great communication, great experience. I will definitely go straight back to him when needed.`},
+      {name:"Susan Ebert", stars:5, time:"2 years ago", text:`I had some body work done on my car. George's skills are so intuitive and are matched by his truly wonderful customer service. Great communication, great experience. I will definitely go straight back to him when needed.`},
       {name:"Mike Bli", stars:5, time:"6 years ago", text:`I recently had to my engine go out on my 2010 terrain, and the dealership that I bought it from told me it would be over $8000.00 to fix. I ended up looking online and finding the only place I will ever take a vehicle if I ever need to have … More`},
       {name:"Cordia LaFontaine", stars:5, time:"5 years ago", text:`Took 2005 Lincoln Town Car to Service King after a wreck. They quoted me $5,000 repair estimate, but when the insurance totaled my vehicle they refused to fix it. George took my car and fixed it. He got my car in sooner than he said and … More`},
       {name:"Amanda Garland", stars:5, time:"9 years ago", text:`George has been my auto mechanic for my family and I for many years. He has always been trustworthy and very reliable. He has always gotten my vehicle and I back in the road in a timely manner and very fair pricing. I would recommend him for all your vehicle needs!`},
@@ -316,17 +390,17 @@ I intend on taking all my mechanic needs to him with ease.  Thanks George and I 
       {name:"Jordan Karim", stars:5, time:"7 years ago", text:`George is a top-notch mechanic! Going the extra mile isn't ever seen as something extra with him. Making sure everything is done correctly and thoroughly is standard with George. I would trust him with everything from a simple oil change or … More`},
       {name:"Cheyanne Osoria", stars:5, time:"5 years ago", text:`George is amazing! He truly cares about his clients and tries to give you the most affordable prices. He handles everything personally so I trust his opinion. I was a college student with no family and he always took care of my car needs with no hesistation! I love George!! More`},
       {name:"Lily McFarland", stars:5, time:"Edited 9 months ago", text:`Great service! Very nice and honest. Highly recommend! Very efficient and explained everything well to us.
-We were on a trip there and he was very understanding and helpful. He really did so much for us and we can’t thank him enough.`},
+We were on a trip there and he was very understanding and helpful. He really did so much for us and we can't thank him enough.`},
       {name:"Joey Wakim", stars:5, time:"9 years ago", text:`George is incredibly knowledgeable in the automotive industry, and it shows. It's been his passion his entire life. His service is unparalleled, and he genuinely puts the customer first when it comes to getting your car up and running again. Highly recommended!!`},
-      {name:"TJ “Tjduncan1998” Duncan", stars:5, time:"6 years ago", text:`George was the saving grace of Thanksgiving break. A day after thanksgiving while visiting my parents, we were all from out of town, my car started squealing like rusty train. George took my car in, was extremely communicative and flexible, … More`},
+      {name:"TJ "Tjduncan1998" Duncan", stars:5, time:"6 years ago", text:`George was the saving grace of Thanksgiving break. A day after thanksgiving while visiting my parents, we were all from out of town, my car started squealing like rusty train. George took my car in, was extremely communicative and flexible, … More`},
       {name:"Tracy Hurd", stars:5, time:"7 years ago", text:`George is man to see if you want to support a local business, an honest man and veteran. He does high quality work. George even called to make sure the vehicle made it safely to Florida! I have a mechanic I can trust in OKC. THANKS GEORGE!`},
-      {name:"Daniel Mac Kenzie", stars:5, time:"3 years ago", text:`George has been doing work on my cars since I moved to the city 2 years ago,  he is very professional and amazing Mechanic, it’s hard to find someone to work on Mercedes and he is way better priced than the dealership.  He is worth very penny I spent. More`},
+      {name:"Daniel Mac Kenzie", stars:5, time:"3 years ago", text:`George has been doing work on my cars since I moved to the city 2 years ago,  he is very professional and amazing Mechanic, it's hard to find someone to work on Mercedes and he is way better priced than the dealership.  He is worth very penny I spent. More`},
       {name:"Brian Jacobsen", stars:5, time:"8 years ago", text:`Just went for the first time and couldn't be happier with my experience.  I found George and his crew both competent and professional!  The fact they were friendly was a bonus!  Make George your mechanic you'll be glad you did.`},
       {name:"Esther Bird", stars:5, time:"6 years ago", text:`I highly recommend this place. My sons and I were stranded after our car broke down. George went the extra mile to repair it for us at an affordable price and had us back on the road safely ASAP. He was super friendly and great about explaining what needed to be fixed etc. Customer Service and Repair were top notch.`},
-      {name:"Baylee Keyworth", stars:5, time:"4 years ago", text:`So helpful. We were driving to OKC to buy a used car and needed an inspection. While he couldn’t get us in that day he sat on the phone with me for 20 minutes and had me makes detailed notes of each thing to check and what it meant. Very valuable advise! Thankful!`},
+      {name:"Baylee Keyworth", stars:5, time:"4 years ago", text:`So helpful. We were driving to OKC to buy a used car and needed an inspection. While he couldn't get us in that day he sat on the phone with me for 20 minutes and had me makes detailed notes of each thing to check and what it meant. Very valuable advise! Thankful!`},
       {name:"Amir Alavi", stars:5, time:"7 years ago", text:`This is a great mechanic shop.   The owner is a straight shooter. No BS over here. The work is done properly and George stands by his  warranty. … More`},
       {name:"Sean", stars:5, time:"a year ago", text:`Had a great experience! George got my car taken care of for a great price and had awesome communication throughout the process`},
-      {name:"Jake Smith", stars:1, time:"a year ago", text:`When I first brought my car in to him I told him I need everything that’s wrong fixed an he agrees like it’s no problem, so he told me give him a month an took over 3 months to work on my car an when it’s time to pay I paid him $3,000 just … More`},
+      {name:"Jake Smith", stars:1, time:"a year ago", text:`When I first brought my car in to him I told him I need everything that's wrong fixed an he agrees like it's no problem, so he told me give him a month an took over 3 months to work on my car an when it's time to pay I paid him $3,000 just … More`},
       {name:"Carrie Walker", stars:5, time:"6 years ago", text:`So thankful I found you George! George got me home safe and sound when everyone else said they were busy. And charged a fair price to boot. Would recommend to anyone.`},
       {name:"Dean", stars:5, time:"5 years ago", text:`The best mechanic around and saved me lots of money.  My wife's Camaro runs butter than when she first purchased it. … More`},
       {name:"Elizabeth Vassar", stars:5, time:"Edited 8 years ago", text:`Awesome mechanic! I'll never take my car to anyone else. Knowledgeable,  respectful and honest. The price is always reasonable. You won't find anyone more reliable!`},
@@ -344,43 +418,3 @@ Quality, Professionalism…
 More`},
       {name:"Cris Joy U Haddad", stars:5, time:"2 years ago", text:""},
       {name:"Cristin Mercer", stars:5, time:"6 years ago", text:""}
-    ];
-
-    // Render first 6, then reveal in batches of 6. Button should show remaining count.
-    const listEl = document.getElementById('reviewsList');
-    const btn = document.getElementById('loadMore');
-    let shown = 0;
-
-    function starString(n){
-      const full = '★'.repeat(n), empty = '☆'.repeat(5-n);
-      return `<span class="stars" aria-label="${n} out of 5 stars">${full}${empty}</span>`;
-    }
-
-    function renderNext(batch=6){
-      const slice = REVIEWS.slice(shown, shown+batch);
-      slice.forEach(r=>{
-        const card = document.createElement('article');
-        card.className = 'review';
-        card.innerHTML = `
-          <div>${starString(r.stars)}</div>
-          <h4>${r.name}</h4>
-          <small>${r.time}</small>
-          <div class="body">${r.text ? r.text.replace(/\n/g,'<br>') : ''}</div>
-        `;
-        listEl.appendChild(card);
-      });
-      shown += slice.length;
-      const remaining = REVIEWS.length - shown;
-      if (remaining > 0){
-        btn.textContent = `Show ${remaining > 6 ? 6 : remaining} more (total ${remaining})`;
-        btn.style.display = 'inline-flex';
-      } else {
-        btn.style.display = 'none';
-      }
-    }
-
-    btn.addEventListener('click', ()=>renderNext(6));
-    renderNext(6);
-  </script>
-</body>
-</html>
