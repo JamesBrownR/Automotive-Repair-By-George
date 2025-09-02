@@ -411,4 +411,46 @@ More`},
 Quality, Professionalism…
 More`},
       {name:"Cris Joy U Haddad", stars:5, time:"2 years ago", text:""},
-      {name:"Cristin Mercer", stars:5, time:"6 years ago", text:""}
+      {name:"Cristin Mercer", stars:5, time:"6 years ago", text:""} ];
+
+// Render first 6, then reveal in batches of 6. Button should show remaining count.
+const listEl = document.getElementById('reviewsList');
+const btn = document.getElementById('loadMore');
+let shown = 0;
+
+
+function starString(n){
+const full = '★'.repeat(n), empty = '☆'.repeat(5-n);
+return `<span class="stars" aria-label="${n} out of 5 stars">${full}${empty}</span>`;
+}
+
+
+function renderNext(batch=6){
+const slice = REVIEWS.slice(shown, shown+batch);
+slice.forEach(r=>{
+const card = document.createElement('article');
+card.className = 'review';
+card.innerHTML = `
+<div>${starString(r.stars)}</div>
+<h4>${r.name}</h4>
+<small>${r.time}</small>
+<div class="body">${r.text ? r.text.replace(/\n/g,'<br>') : ''}</div>
+`;
+listEl.appendChild(card);
+});
+shown += slice.length;
+const remaining = REVIEWS.length - shown;
+if (remaining > 0){
+btn.textContent = `Show ${remaining > 6 ? 6 : remaining} more (total ${remaining})`;
+btn.style.display = 'inline-flex';
+} else {
+btn.style.display = 'none';
+}
+}
+
+
+btn.addEventListener('click', ()=>renderNext(6));
+renderNext(6);
+</script>
+</body>
+</html>
